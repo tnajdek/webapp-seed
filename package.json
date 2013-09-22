@@ -1,0 +1,27 @@
+{
+  "name": "loltalk-frontend",
+  "version": "0.0.1",
+  "description": "",
+  "main": " ",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tnajdek/loltalk"
+  },
+  "author": "",
+  "license": "proprietary",
+  "bugs": {
+    "url": "https://github.com/tnajdek/loltalk/issues"
+  },
+  "devDependencies": {
+    "grunt-contrib-requirejs": "~0.4.1",
+    "grunt": "~0.4.1",
+    "bower": "~1.2.6",
+    "grunt-remove-logging": "~0.1.1",
+    "almond": "~0.2.6",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-less": "~0.7.0"
+  }
+}

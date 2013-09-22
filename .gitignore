@@ -1,0 +1,42 @@
+*.py[co]
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+
+#Translations
+*.mo
+
+#Mr Developer
+.mr.developer.cfg
+
+venv
+
+_src/*
+_res/*
+.codeintel
+
+#sqllite
+*.db
+
+#logs
+*.log
+
+node_modules
+bower_components
+frontend/build
