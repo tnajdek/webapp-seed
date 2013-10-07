@@ -55,6 +55,16 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		replace: {
+			index: {
+				src: 'src/index.html',
+				dest: 'build/index.html',
+				replacements: [{
+					from: '<script data-main="/js/require-config" src="/bower_components/requirejs/require.js"></script>',
+					to: '<script src="/js/webapp.js?cb=<%= Date.now() %>"></script>'
+				}]
+			}
+		},
 		watch: {
 			less: {
 				files: ['src/less/*.less', 'src/less/**/*.less'],
@@ -63,7 +73,7 @@ module.exports = function(grunt) {
 					spawn: false,
 				}
 			}
-		},
+		}
 	});
 
 
@@ -72,7 +82,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-text-replace');
 
-	grunt.registerTask('build', ['requirejs', 'removelogging', 'uglify', 'less:production']);
+	grunt.registerTask('build', ['requirejs', 'removelogging', 'uglify', 'replace:index', 'less:production']);
 	grunt.registerTask('develop', ['less:development', 'watch:less']);
 };
