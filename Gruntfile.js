@@ -65,6 +65,14 @@ module.exports = function(grunt) {
 				}]
 			}
 		},
+		connect: {
+			server: {
+				options: {
+					port: 8080,
+					base: 'src'
+				}
+			}
+		},
 		watch: {
 			less: {
 				files: ['src/less/*.less', 'src/less/**/*.less'],
@@ -83,7 +91,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-text-replace');
+	grunt.loadNpmTasks('grunt-contrib-connect');
 
 	grunt.registerTask('build', ['requirejs', 'removelogging', 'uglify', 'replace:index', 'less:production']);
-	grunt.registerTask('develop', ['less:development', 'watch:less']);
+	grunt.registerTask('develop', ['less:development', 'connect', 'watch:less']);
 };
