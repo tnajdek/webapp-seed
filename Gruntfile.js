@@ -81,6 +81,17 @@ module.exports = function(grunt) {
 					spawn: false,
 				}
 			}
+		},
+		karma: {
+			build: {
+				options: {
+					basePath: 'src',
+					frameworks: ['jasmine', 'requirejs'],
+					files: ['test/**/*.js']
+				},
+				singleRun: true,
+				browsers: ['Firefox']
+			}
 		}
 	});
 
@@ -92,7 +103,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-karma');
 
 	grunt.registerTask('build', ['requirejs', 'removelogging', 'uglify', 'replace:index', 'less:production']);
-	grunt.registerTask('develop', ['less:development', 'connect', 'watch:less']);
+	grunt.registerTask('default', ['less:development', 'connect', 'watch:less']);
 };
