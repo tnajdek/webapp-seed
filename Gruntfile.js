@@ -38,10 +38,10 @@ module.exports = function(grunt) {
 				options: {
 					compress: false,
 					yuicompress: false,
-					dumpLineNumbers: 'all'
+					// dumpLineNumbers: 'all'
 				},
 				files: {
-					"build/css/webapp.css": "src/less/webapp.less"
+					"local/css/webapp.css": "src/less/webapp.less"
 				}
 			},
 			production: {
@@ -69,17 +69,43 @@ module.exports = function(grunt) {
 			server: {
 				options: {
 					port: 8080,
-					base: 'src'
+					base: 'local'
 				}
 			}
 		},
 		watch: {
 			less: {
 				files: ['src/less/*.less', 'src/less/**/*.less'],
-				tasks: ['less:development'],
+				tasks: ['less:development', 'autoprefixer:css'],
 				options: {
 					spawn: false,
 				}
+			}
+		},
+		autoprefixer: {
+			options: {
+				browsers: ['last 2 version']
+			},
+			css: {
+				src: 'build/css/webapp.css',
+				dest: 'build/css/webapp.css'
+			}
+		},
+		cssmin: {
+			minify: {
+				files: {
+					'build/css/webapp.css': ['build/css/webapp.css']
+				}
+			}
+		},
+		symlink: {
+			local: {
+				files: [{
+					expand: true,
+					cwd: 'src',
+					src: ['index.html', 'img', 'js'],
+					dest: 'local'
+				}]
 			}
 		},
 		karma: {
@@ -87,7 +113,8 @@ module.exports = function(grunt) {
 				options: {
 					basePath: 'src',
 					frameworks: ['jasmine', 'requirejs'],
-					files: ['test/**/*.js']
+					files: ['test/**/*.js'],
+					exclude: 'src/require-config.js'
 				},
 				singleRun: true,
 				browsers: ['Firefox']
@@ -103,8 +130,11 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
+	grunt.loadNpmTasks('grunt-autoprefixer');
+	grunt.loadNpmTasks('grunt-contrib-symlink');
 	grunt.loadNpmTasks('grunt-karma');
 
 	grunt.registerTask('build', ['requirejs', 'removelogging', 'uglify', 'replace:index', 'less:production']);
-	grunt.registerTask('default', ['less:development', 'connect', 'watch:less']);
+	grunt.registerTask('default', ['symlink:local', 'less:development', 'connect', 'watch:less']);
 };

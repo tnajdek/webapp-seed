@@ -35,6 +35,9 @@
     "karma-coffee-preprocessor": "~0.1.0",
     "karma-phantomjs-launcher": "~0.1.0",
     "karma": "~0.10.2",
-    "grunt-karma": "~0.6.2"
+    "grunt-karma": "~0.6.2",
+    "grunt-contrib-cssmin": "~0.7.0",
+    "grunt-autoprefixer": "~0.4.0",
+    "grunt-contrib-symlink": "~0.2.0"
   }
 }
